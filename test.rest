@@ -1,0 +1,15 @@
+### test GET /website
+GET http://localhost:8080
+### test GET /dashboard web
+GET http://localhost:8080/dashboard
+### test GET /api/data web
+GET http://localhost:8080/api/data
+### Data endpoint for adding a user
+POST http://localhost:8080/api/data
+Content-Type: application/json
+
+{
+    "name": "bereket"
+}
+### DELETE endpoint 
+DELETE  http://localhost:8080/api/data
