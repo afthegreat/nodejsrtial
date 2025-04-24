@@ -4,7 +4,11 @@ import db from '../src/db.js'
 const router= express.Router()
 
 //get all todos for logged in users
-router.get('/',(req,res)=>{ })
+router.get('/',(req,res)=>{ 
+    const gettodo=db.prepare('SELECT * FROM todos WHERE user_id= ?')
+const todos=gettodo.all(req.userId)
+res.json(todos)
+})
 //create new to do tasks
 router.post('/', (req,res) =>{ })
 //update existing to do task
