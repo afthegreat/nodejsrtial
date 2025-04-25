@@ -5,7 +5,7 @@ POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-    "username":"abella",
+    "username":"abelferede916@gmail.com",
     "password":"123123123"
 }
 
@@ -14,8 +14,35 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-    "username":"abella",
+    "username":"abelferede916@gmail.com",
     "password":"123123123"
 }
-###
+###Fetch all users from tha database
 GET http://localhost:5000/auth/fetch-users
+
+
+### fetch all todods /Todos
+Get http://localhost:5000/todos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcxNzU2LCJleHAiOjE3NDU2NTgxNTZ9.gQstQGU0QQbT3_iOiLohHYk-wpbbxcupyhBbc7c-zsU
+###add new todos
+POST http://localhost:5000/todos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcxNzU2LCJleHAiOjE3NDU2NTgxNTZ9.gQstQGU0QQbT3_iOiLohHYk-wpbbxcupyhBbc7c-zsU
+Content-Type: application/json
+
+{
+   "task": "doing home works" 
+}
+
+### update a todo put /todos/:id
+PUT http://localhost:5000/todos/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcxNzU2LCJleHAiOjE3NDU2NTgxNTZ9.gQstQGU0QQbT3_iOiLohHYk-wpbbxcupyhBbc7c-zsU
+Content-Type: application/json
+
+{
+"completed":1
+}
+
+### delete a todo /todo/:id
+
+DELETE  http://localhost:5000/todos/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcxNzU2LCJleHAiOjE3NDU2NTgxNTZ9.gQstQGU0QQbT3_iOiLohHYk-wpbbxcupyhBbc7c-zsU

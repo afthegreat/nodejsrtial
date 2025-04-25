@@ -24,6 +24,9 @@ const insertTodo= db.prepare(`INSERT INTO todos (user_id, task) VALUES(?,?)`)
    const token=jwt.sign({ id: result.lastInsertRowid}, process.env.
     JWT_SECRET,{expiresIn:'24h'}
    )
+   console.log('JWT_SECRET during sign:', process.env.JWT_SECRET);
+console.log('Generated token:', token);
+
    res.json({token})
 }
    catch(err){
@@ -74,7 +77,5 @@ router.get('/fetch-users', (req, res) => {
     res.sendStatus(500);
   }
 });
-
-
 
 export default router
