@@ -23,10 +23,10 @@ GET http://localhost:5000/auth/fetch-users
 
 ### fetch all todods /Todos
 Get http://localhost:5000/todos
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcxNzU2LCJleHAiOjE3NDU2NTgxNTZ9.gQstQGU0QQbT3_iOiLohHYk-wpbbxcupyhBbc7c-zsU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcyMTk5LCJleHAiOjE3NDU2NTg1OTl9.u4Y9KOpNnRZZGSAsI-YtEPOv4IFVtsnG13QHVWGoV1E
 ###add new todos
 POST http://localhost:5000/todos
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcxNzU2LCJleHAiOjE3NDU2NTgxNTZ9.gQstQGU0QQbT3_iOiLohHYk-wpbbxcupyhBbc7c-zsU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcyMTk5LCJleHAiOjE3NDU2NTg1OTl9.u4Y9KOpNnRZZGSAsI-YtEPOv4IFVtsnG13QHVWGoV1E
 Content-Type: application/json
 
 {
@@ -35,7 +35,7 @@ Content-Type: application/json
 
 ### update a todo put /todos/:id
 PUT http://localhost:5000/todos/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcxNzU2LCJleHAiOjE3NDU2NTgxNTZ9.gQstQGU0QQbT3_iOiLohHYk-wpbbxcupyhBbc7c-zsU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcyMTk5LCJleHAiOjE3NDU2NTg1OTl9.u4Y9KOpNnRZZGSAsI-YtEPOv4IFVtsnG13QHVWGoV1E
 Content-Type: application/json
 
 {
@@ -44,5 +44,5 @@ Content-Type: application/json
 
 ### delete a todo /todo/:id
 
-DELETE  http://localhost:5000/todos/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcxNzU2LCJleHAiOjE3NDU2NTgxNTZ9.gQstQGU0QQbT3_iOiLohHYk-wpbbxcupyhBbc7c-zsU
+DELETE  http://localhost:5000/todos/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ1NTcyMTk5LCJleHAiOjE3NDU2NTg1OTl9.u4Y9KOpNnRZZGSAsI-YtEPOv4IFVtsnG13QHVWGoV1E
