@@ -1,18 +1,4 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import { connectDB } from './config/db.js';
-import Product from './models/poductModel.js';
-import mongoose from 'mongoose';
-
-dotenv.config();
-const app = express();
-const port = process.env.PORT || 5000;
-
-app.use(express.json());
-
-
-
-app.post('/api/products', async (req, res) => {
+ const addProduct=async (req, res) => {
   const product = req.body;
 
   if (!product.name || !product.price || !product.image) {
@@ -28,10 +14,10 @@ app.post('/api/products', async (req, res) => {
     console.error("Error creating the product:", error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
-});
+}
 
 
-app.delete('/api/products/:id', async (req, res) => {
+const deleteProduct= async (req, res) => {
   const id= req.params.id;
 console.log(id);
   try {
@@ -43,11 +29,11 @@ console.log(id);
   } catch (error) {
     console.error("Error deleting the product:", error);
     res.status(500).json({ success: false, message: 'Server error' });
-  }});
+  }}
 
 
 
-  app.get('/api/products', async (req, res) => {
+  const findProduct= async (req, res) => {
  try {
    const products = await Product.find();
    if(products.length === 0) {
@@ -62,10 +48,10 @@ catch (error) {
    console.error("Error fetching products:", error);
    res.status(500).json({ success: false, message: 'Server error' });
   }
-})
+}
 
 
-app.put('/api/products/:id', async (req, res) => {
+const updateProduct= async (req, res) => {
 const id = req.params.id;
 if(!mongoose.Types.ObjectId.isValid(id)) {
   return res.status(400).json({ message: 'Invalid product ID' });
@@ -80,9 +66,4 @@ if(product.length === 0) {
   return res.status(404).json({ message: 'No products found' });
 }
 res.status(200).json({ success: true, data: updatedProduct });
-})
-
-app.listen(port, () => {
-  connectDB();
-  console.log(`Server is running on port ${port}`);
-})
+}
