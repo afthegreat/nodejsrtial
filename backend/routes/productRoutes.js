@@ -1,9 +1,9 @@
 import express from "express";
-import router from "Router";
-import { addProduct,findProduct,deleteProduct,updateProduct } from "../controllers/productControllers";
+import { addProduct,findProduct,deleteProduct,updateProduct } from "../controllers/productControllers.js";
 
-router.route("/", get(findProduct).put(addProduct));
-router.route("/:id", delete(deleteProduct).put(updateProduct))
+const router = express.Router();
+router.route("/"). get(findProduct).post(addProduct)
+router.route("/:id"). delete(deleteProduct).put(updateProduct)
 
 
 

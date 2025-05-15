@@ -1,4 +1,5 @@
- const addProduct=async (req, res) => {
+import Product from '../models/poductModel.js';
+const addProduct=async (req, res) => {
   const product = req.body;
 
   if (!product.name || !product.price || !product.image) {
@@ -67,3 +68,6 @@ if(product.length === 0) {
 }
 res.status(200).json({ success: true, data: updatedProduct });
 }
+
+
+export { addProduct, deleteProduct, findProduct, updateProduct };
