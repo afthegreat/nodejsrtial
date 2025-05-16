@@ -6,7 +6,7 @@ import { useProductStore } from '../store/product.js'
 import ProductCard from '../components/ProductCard.jsx'
 
 const HomePage = () => {
-  const { products ,fetchProducts} = useProductStore()
+  const { products=[] ,fetchProducts} = useProductStore()
 
   useEffect(() => {
     fetchProducts()}, [fetchProducts])
