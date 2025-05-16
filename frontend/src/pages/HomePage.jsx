@@ -28,7 +28,7 @@ const HomePage = () => {
       sm: 2,
       md: 3      
     }}
-    spacing={8}
+    spacing={5}
     w={"full"}
     >
 {products.map((product) => (
