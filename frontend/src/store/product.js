@@ -1,5 +1,5 @@
 import { create } from "zustand";
-
+import mongoose from "mongoose";
 
 export const useProductStore = create((set) => ({
     products:[],
@@ -44,7 +44,9 @@ fetchProducts: async () => {
 
     return { success: true, message: data.message };
   },
-  updateProduct: async (pid, updatedProduct) => {
+ updateProduct: async (pid, updatedProduct) => {
+  try {
+    // Make the PUT request to update the product
     const res = await fetch(`/api/products/${pid}`, {
       method: "PUT",
       headers: {
@@ -52,16 +54,46 @@ fetchProducts: async () => {
       },
       body: JSON.stringify(updatedProduct),
     });
- const data = await res.json();
- if(!data.success) {
-    return {success: false, message: data.message}
+
+    // Try to parse JSON response
+    let data;
+    try {
+      data = await res.json();
+    } catch (jsonError) {
+      return {
+        success: false,
+        message: "Failed to parse server response. Possibly a server error.",
+      };
     }
+
+    // Handle response errors
+    if (!res.ok || !data.success) {
+      return {
+        success: false,
+        message: data?.message || "Failed to update the product",
+      };
+    }
+
+    // Update Zustand store state
     set((state) => ({
-        products: state.products.map((product) =>
-            product._id === pid ? { ...product, ...updatedProduct } : product
-        ),
+      products: state.products.map((product) =>
+        product._id === pid ? { ...product, ...data.data } : product
+      ),
     }));
-      return { success: true, message: data.message }; 
-  },
+
+    return {
+      success: true,
+      message: "Product updated successfully",
+    };
+  } catch (error) {
+    // Catch any unexpected errors
+    console.error("Update product error:", error);
+    return {
+      success: false,
+      message: "Unexpected error while updating product",
+    };
+  }
+},
+
 }));
 

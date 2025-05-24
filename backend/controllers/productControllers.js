@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Product from '../models/poductModel.js';
 const addProduct=async (req, res) => {
   const product = req.body;
@@ -50,22 +51,37 @@ catch (error) {
 }
 
 
-const updateProduct= async (req, res) => {
-const id = req.params.id;
-if(!mongoose.Types.ObjectId.isValid(id)) {
-  return res.status(400).json({ message: 'Invalid product ID' });
-}
-const product = req.body;
-const updatedProduct = await Product.findByIdAndUpdate(id,product, {new:true});
-if(!updatedProduct) {
-  return res.status(400).json({ message: 'No products found' });
+const updateProduct = async (req, res) => {
+  const id = req.params.id;
+  const product = req.body;
 
-}
-if(product.length === 0) {
-  return res.status(404).json({ message: 'No products found' });
-}
-res.status(200).json({ success: true, data: updatedProduct });
-}
+  console.log("➡️ Update request received");
+  console.log("🆔 Product ID:", id);
+  console.log("📦 Product data:", product);
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      console.log("❌ Invalid ID");
+      return res.status(400).json({ message: 'Invalid product ID' });
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true });
+
+    if (!updatedProduct) {
+      console.log("❌ Product not found in DB");
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    console.log("✅ Product updated:", updatedProduct);
+    res.status(200).json({ success: true, data: updatedProduct });
+
+  } catch (error) {
+    console.error("🔥 Error updating the product:", error.message);
+    console.error("🧱 Stack trace:", error.stack);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+};
+
 
 
 export { addProduct, deleteProduct, findProduct, updateProduct };
