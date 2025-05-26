@@ -55,10 +55,6 @@ const updateProduct = async (req, res) => {
   const id = req.params.id;
   const product = req.body;
 
-  console.log("➡️ Update request received");
-  console.log("🆔 Product ID:", id);
-  console.log("📦 Product data:", product);
-
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       console.log("❌ Invalid ID");
@@ -72,7 +68,7 @@ const updateProduct = async (req, res) => {
       return res.status(404).json({ message: 'Product not found' });
     }
 
-    console.log("✅ Product updated:", updatedProduct);
+    console.log("✅ Product updated:");
     res.status(200).json({ success: true, data: updatedProduct });
 
   } catch (error) {

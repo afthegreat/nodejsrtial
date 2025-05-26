@@ -6,5 +6,4 @@ router.route("/"). get(findProduct).post(addProduct)
 router.route("/:id"). delete(deleteProduct).put(updateProduct)
 
 
-
 export default router;
