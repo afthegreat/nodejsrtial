@@ -10,7 +10,7 @@ import VerifyEmail from './pages/verifyemail'
 const App = () => {
   return (
     <div>
-      <h1>hello</h1>
+ 
       <Routes>
          <Route path='/' element={<Home/>} />
         <Route path='/login' element={<Login/>} />
