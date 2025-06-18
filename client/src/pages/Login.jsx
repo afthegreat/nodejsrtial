@@ -3,10 +3,13 @@ import { assets } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 import { AppContent } from '../context/AppContext'
 import axios from 'axios'
+import {toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const Login = () => {
   const navigate= useNavigate()
-  const {backendUrl, setIsLoggedin}=useContext(AppContent)
+  const {backendUrl, setIsLoggedin, getUserData}=useContext(AppContent)
 
   const [state, setstate]=useState('Sign Up')
   const [name, setName]=useState('')
@@ -19,21 +22,38 @@ const onSubmitHandler= async (e)=>{
 
     axios.defaults.withCredentials=true
     if(state===('Sign Up')){
-   const data= await axios.post(backendUrl+'/api/auth/register', {name, email, password})
-      if(data.success){
+   const response= await axios.post(backendUrl+'/api/auth/register', {name, email, password})
+      if(response.data.success){
         setIsLoggedin(true)
+        getUserData()
         navigate('/')
       }else
       {
-        alert(data.message)
+     toast.error(response.data.message)   
+   }
+    }
+    else {
+      const response= await axios.post(backendUrl+'/api/auth/login', {email, password})
+      console.log('request sent')
+      if(response.data.success){
+        setIsLoggedin(true)
+        getUserData()
+        navigate('/')
+      }
+      else{
+      toast.error(response.data.message );
       }
     }
 
-  }catch (error)
+}catch (error) 
+{
+       toast.error(error)   
+
+}
 }
   return (
     <div className='flex items-center justify-center min-h-screen px-6 sm:px-0
-    bg-gradient-to-br from-blue-200 to-puple-400'>
+    bg-gradient-to-br from-blue-200 to-purple-400'>
       <img onClick={()=>navigate('/')} src={assets.logo} alt="Logo" className='absolute left-5 sm:left-20 
       top-5 w-28 sm:w-32 cursor-pointer '/>
       <div className='bg-slate-900 p-10 rounded-lg shadow-lg w-full
