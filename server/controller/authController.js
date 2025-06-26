@@ -215,10 +215,7 @@ export const isAuthenticated= async (req, res) =>{
     }
 export const sendResetOtp= async (req,res)=>{
     const {email}= req.body
-
-    if(!email){
-        return res.json({success:false, message:"email is required"})
-    }
+  
     try{
     const user= await userModel.findOne({email})
     if(!user){
