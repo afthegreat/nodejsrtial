@@ -12,9 +12,8 @@ authRouter.post('/logout', logout)
 authRouter.post('/delete', deleteUsers)
 authRouter.post('/sendverifyotp', userAuth, sendVerifyOtp)
 authRouter.post('/verifyaccount', userAuth, verifyEmail)
-authRouter.post('/isauthenticated', userAuth, isAuthenticated)
-authRouter.post('/sendresetotp', userAuth, sendResetOtp)
-authRouter.post('/resetpassword', userAuth, resetPassword)
+authRouter.get('/isauthenticated', userAuth, isAuthenticated)
+authRouter.post('/sendresetotp', sendResetOtp)
+authRouter.post('/resetpassword', resetPassword)
 
 export default authRouter
- 
