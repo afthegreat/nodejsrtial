@@ -1,8 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
+import axios from 'axios';
+import { AppContent } from '../context/AppContext';
+import {toast} from 'react-toastify'
 
 const VerifyEmail = () => {
+  axios.defaults.withCredentials=true
+
+  const {backendUrl, getUserData,isLoggedin,userData}=useContext(AppContent)
   const navigate = useNavigate();
   const inputRefs = useRef([]);
 
@@ -15,13 +21,49 @@ const VerifyEmail = () => {
     } else {
       e.target.value = ''; // only allow digits
     }
-  };
+  }
 
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && !e.target.value && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
-  };
+  }
+const handlePaste = (e) => {
+  const paste = e.clipboardData.getData('text');
+  const pasteArray = paste.replace(/\D/g, '').split(''); // only digits
+
+  pasteArray.forEach((char, index) => {
+    if (inputRefs.current[index]) {
+      inputRefs.current[index].value = char;
+    }
+  });
+};
+
+
+
+  const onSubmitHandler= async (e)=>{
+    e.preventDefault()
+    try{
+      const otpArray = inputRefs.current.map(e=>e.value)
+      const otp=otpArray.join('')
+      const {data}= await axios.post(backendUrl+'/api/auth/verifyaccount',{otp})
+
+      if(data.success){
+        toast.success(data.message)
+        getUserData()
+        navigate('/')
+      }
+      else{
+        toast.error(data.message)
+      }
+    }catch(error){
+      toast.error(error.message)
+    }
+  }
+
+  useEffect(()=>{
+    isLoggedin &&userData.isAccountVerified && navigate('/')
+  },[isLoggedin,userData])
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-purple-400'>
@@ -32,11 +74,11 @@ const VerifyEmail = () => {
         className='absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer'
       />
 
-      <form className='bg-slate-900 p-8 rounded-lg w-96 text-sm'>
+      <form onSubmit={onSubmitHandler} className='bg-slate-900 p-8 rounded-lg w-96 text-sm'>
         <h1 className='text-white text-2xl font-semibold text-center mb-4'>Email Verify OTP</h1>
         <p className='text-center mb-6 text-indigo-800'>Enter the OTP sent to your email</p>
 
-        <div className='flex justify-between mb-8'>
+        <div className='flex justify-between mb-8' onPaste={handlePaste}>
           {Array(6).fill(0).map((_, index) => (
             <input
               key={index}
@@ -53,7 +95,7 @@ const VerifyEmail = () => {
 
         <button
           type="submit"
-          className='w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full'
+          className='w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full cursor-pointer '
         >
           Verify Email
         </button>
@@ -61,5 +103,6 @@ const VerifyEmail = () => {
     </div>
   );
 };
+
 
 export default VerifyEmail;
