@@ -91,7 +91,7 @@ const onSubmitHandler= async (e)=>{
           {state==='Login' && ( 
             <p onClick={()=>navigate('/resetpassword')} className='mb-4 text-indigo-500 cursor-pointer'>Forget password</p>)}
          
-          <button className='w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium'>{state}</button>
+          <button className='w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium cursor-pointer'>{state}</button>
           </form> 
           {state==='Sign Up' ? ( <p className='text-gray-400 text-center text-xs mt-4'>Already have an account?{' '}
             <span onClick={()=> setstate('Login')} className='text-blue-400 underline cursor-pointer'> Login here
