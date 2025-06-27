@@ -248,7 +248,7 @@ export const resetPassword= async (req,res)=>{
     const{email, otp,newPassword}=req.body
 
     if(!email|| !otp||!newPassword){
-        return res.json({success:false, message:"email, otp and newpassord are req'd"})
+        return res.json({success:false, message:"email, otp and newpassword are req'd"})
     }
     try{
     const user= await userModel.findOne({email})
