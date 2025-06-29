@@ -11,7 +11,7 @@ export const Login = () => {
   const navigate= useNavigate()
   const {backendUrl, setIsLoggedin, getUserData}=useContext(AppContent)
 
-  const [state, setstate]=useState('Sign Up')
+  const [state, setstate]=useState('Login')
   const [name, setName]=useState('')
   const [email, setEmail]=useState('')
   const [password, setPassword]=useState('')
